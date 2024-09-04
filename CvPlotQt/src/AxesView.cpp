@@ -218,8 +218,8 @@ AxesView::~AxesView(){
 
 void AxesView::paint(QPainter * painter){
 	//called from render thread, but main thread is blocked
-	const int rows = painter->device()->height();
-	const int cols = painter->device()->width();
+	const int rows = QQuickPaintedItem::height();
+	const int cols = QQuickPaintedItem::width();
 	impl->_axes.render(impl->_mat, cv::Size(cols, rows));
 	paintMat(painter, impl->_mat);
 }
