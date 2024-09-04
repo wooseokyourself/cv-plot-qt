@@ -164,7 +164,13 @@ public:
 		if (!_acceptMouseEvents) {
 			return;
 		}
-		MouseEvent mouseEvent(_axes, _mat.size(), getType(event), event->pos().x(), event->pos().y(), getFlags(event));
+		MouseEvent mouseEvent(_axes, _mat.size(), getType(event),
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+			event->pos().x(), event->pos().y(),
+#elif QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			event->position().x(), event->position().y(),
+#endif
+			getFlags(event));
 		//call virtual method
 		if (_parent.mouseEvent(mouseEvent)) {
 			_parent.updateProperties();
@@ -182,7 +188,13 @@ public:
 		//from #define CV_GET_WHEEL_DELTA(flags) ((short)((flags >> 16) & 0xffff)) // upper 16 bits
 		int steps = event->angleDelta().y();
 		int flags = (steps & 0xffff) << 16;
-		MouseEvent mouseEvent(_axes, _mat.size(), cv::MouseEventTypes::EVENT_MOUSEWHEEL, event->pos().x(), event->pos().y(), flags);
+		MouseEvent mouseEvent(_axes, _mat.size(), cv::MouseEventTypes::EVENT_MOUSEWHEEL, 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+			event->pos().x(), event->pos().y(),
+#elif QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			event->position().x(), event->position().y(),
+#endif
+			flags);
 		if (_mouseAdapter.mouseEvent(mouseEvent)) {
 			_parent.updateProperties();
 			_parent.mouseHandled();
