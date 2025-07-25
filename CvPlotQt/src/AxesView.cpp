@@ -254,6 +254,14 @@ QPointF AxesView::unproject(QPointF point){
 	return QPointF((qreal)pos.x, (qreal)pos.y);
 }
 
+QPointF AxesView::project(QPointF point) {
+	CvPlot::Axes& axes = getAxes();
+	auto projection = axes.getProjection(cv::Size(width(), height()));
+	auto pos = projection.project(cv::Point2d(point.x(), point.y()));
+	auto outer = projection.innerToOuter(pos);
+	return QPointF((qreal)outer.x, (qreal)outer.y);
+}
+
 void AxesView::mousePressEvent(QMouseEvent *event) {
 	impl->qMouseEvent(event);
 }

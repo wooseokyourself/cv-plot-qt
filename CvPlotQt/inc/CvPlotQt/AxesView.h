@@ -110,6 +110,7 @@ public:
 	void childEvent(QChildEvent *event)override;
 
 	Q_INVOKABLE QPointF unproject(QPointF point);
+	Q_INVOKABLE QPointF project(QPointF point);
 
 protected:
 	//mouse overrides

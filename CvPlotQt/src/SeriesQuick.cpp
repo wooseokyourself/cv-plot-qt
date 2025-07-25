@@ -163,6 +163,16 @@ QString SeriesQuick::getMarkerType() {
 	return string;
 }
 
+void SeriesQuick::setMarkerSize(int markerSize) {
+	if (impl->_seriesPtr->getMarkerSize() == markerSize) return;
+	impl->_seriesPtr->setMarkerSize(markerSize);
+	emit markerSizeChanged();
+}
+
+int SeriesQuick::getMarkerSize() {
+	return impl->_seriesPtr->getMarkerSize();
+}
+
 void SeriesQuick::setLineWidth(int lineWidth){
 	impl->_seriesPtr->setLineWidth(lineWidth);
 	lineWidthChanged();

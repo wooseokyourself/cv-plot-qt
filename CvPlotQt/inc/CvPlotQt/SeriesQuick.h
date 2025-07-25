@@ -18,6 +18,7 @@ class CVPLOTQT_LIBRARY_INTERFACE SeriesQuick :public DrawableQuick {
 	Q_PROPERTY(QVariantList yData READ getYData WRITE setYData NOTIFY yDataChanged);
 	Q_PROPERTY(QString lineType READ getLineType WRITE setLineType NOTIFY lineTypeChanged);
 	Q_PROPERTY(QString markerType READ getMarkerType WRITE setMarkerType NOTIFY markerTypeChanged);
+	Q_PROPERTY(int markerSize READ getMarkerSize WRITE setMarkerSize NOTIFY markerSizeChanged);
 	Q_PROPERTY(int lineWidth READ getLineWidth WRITE setLineWidth NOTIFY lineWidthChanged);
 	Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged);
 
@@ -32,7 +33,9 @@ public:
 	void setLineType(QString lineType);
 	QString getLineType();
 	void setMarkerType(QString markerType);
-	QString getMarkerType();	
+	QString getMarkerType();
+	void setMarkerSize(int markerSize);
+	int getMarkerSize();
 	void setLineWidth(int lineWidth);
 	int getLineWidth();
 	void setColor(QColor color);
@@ -42,6 +45,7 @@ public:
 	Q_SIGNAL void yDataChanged();
 	Q_SIGNAL void lineTypeChanged();
 	Q_SIGNAL void markerTypeChanged();
+	Q_SIGNAL void markerSizeChanged();
 	Q_SIGNAL void lineWidthChanged();
 	Q_SIGNAL void colorChanged();
 
